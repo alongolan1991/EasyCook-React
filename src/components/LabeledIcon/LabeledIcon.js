@@ -1,12 +1,13 @@
 import React from 'react';
 import './LabeledIcon.css';
+import Icon from '../Icon';
 
-const LabeledIcon = (props) => {
+const LabeledIcon = ({iconName, row, text}) => {
    
     return (
-        <div className="labeled-icon" style={{flexDirection: props.row ? 'row' : 'column'}}>
-            <img src={props.imgSrc} style={{ width: '20px' }} />
-            <p className="icons" style={{marginLeft: props.row ? '5px' : '0'}}>{props.text}</p>
+        <div className="labeled-icon" style={{flexDirection: row ? 'row' : 'column'}}>
+            <Icon name={iconName} />
+            <p className="icons" style={{marginLeft: row ? '5px' : '0'}}>{text}</p>
         </div>
     );
 }

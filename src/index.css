@@ -14,3 +14,67 @@ button {
 *, *:after, *:before {
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?243rc4');
+  src:  url('fonts/icomoon.eot?243rc4#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?243rc4') format('truetype'),
+    url('fonts/icomoon.woff?243rc4') format('woff'),
+    url('fonts/icomoon.svg?243rc4#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-assian:before {
+  content: "\e900";
+}
+.icon-calories:before {
+  content: "\e901";
+  color: #9d9d9d;
+}
+.icon-cart:before {
+  content: "\e902";
+}
+.icon-chicken:before {
+  content: "\e903";
+}
+.icon-dessert:before {
+  content: "\e904";
+}
+.icon-meat:before {
+  content: "\e907";
+}
+.icon-milk:before {
+  content: "\e908";
+}
+.icon-vegan:before {
+  content: "\e909";
+}
+.icon-ingredients:before {
+  content: "\e926";
+}
+.icon-clock:before {
+  content: "\e94e";
+}
+.icon-vegetarian:before {
+  content: "\e9a4";
+}
+.icon-favorites:before {
+  content: "\e9d2";
+}

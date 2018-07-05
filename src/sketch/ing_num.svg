@@ -6,7 +6,7 @@
 		</clipPath>
 	</defs>
 	<g clip-path="url(#clip_0)">
-		<path fill="none" stroke="rgb(157,157,157)" stroke-width="1.2" stroke-miterlimit="4" transform="translate(0.0172119 0.374512)" d="M13.5064 18.2786L0 18.2786L0 0L9.19549 0L9.75033 0L13.5064 3.68779L13.5064 18.2786Z"/>
+		<path fill="none" stroke="#000" stroke-width="1.2" stroke-miterlimit="4" transform="translate(0.0172119 0.374512)" d="M13.5064 18.2786L0 18.2786L0 0L9.19549 0L9.75033 0L13.5064 3.68779L13.5064 18.2786Z"/>
 	</g>
 	<defs>
 		<clipPath id="clip_1">
@@ -14,7 +14,7 @@
 		</clipPath>
 	</defs>
 	<g clip-path="url(#clip_1)">
-		<path fill="none" stroke="rgb(157,157,157)" stroke-width="1.2" stroke-miterlimit="4" transform="translate(3.13586 9)" d="M0 0L7.26868 0"/>
+		<path fill="none" stroke="#000" stroke-width="1.2" stroke-miterlimit="4" transform="translate(3.13586 9)" d="M0 0L7.26868 0"/>
 	</g>
 	<defs>
 		<clipPath id="clip_2">
@@ -22,7 +22,7 @@
 		</clipPath>
 	</defs>
 	<g clip-path="url(#clip_2)">
-		<path fill="none" stroke="rgb(157,157,157)" stroke-width="1.2" stroke-miterlimit="4" transform="translate(3.13586 13)" d="M0 0L7.26868 0"/>
+		<path fill="none" stroke="#000" stroke-width="1.2" stroke-miterlimit="4" transform="translate(3.13586 13)" d="M0 0L7.26868 0"/>
 	</g>
 	<defs>
 		<clipPath id="clip_3">
@@ -30,6 +30,6 @@
 		</clipPath>
 	</defs>
 	<g clip-path="url(#clip_3)">
-		<path fill="none" stroke="rgb(157,157,157)" stroke-width="1.2" stroke-miterlimit="4" transform="translate(9.11145 0.69519)" d="M0 0L0 3.84813L4.24006 3.84813"/>
+		<path fill="none" stroke="#000" stroke-width="1.2" stroke-miterlimit="4" transform="translate(9.11145 0.69519)" d="M0 0L0 3.84813L4.24006 3.84813"/>
 	</g>
 </svg>
