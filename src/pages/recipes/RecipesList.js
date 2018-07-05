@@ -12,11 +12,13 @@ import pic from '../../media/chicken/Baked Buffalo Wings/image/Baked Buffalo Win
 import LabeledIcon from '../../components/LabeledIcon/LabeledIcon';
 import RecipeItem from './RecipeItem';
 import api from '../../services/api.services';
+import Icon from '../../components/Icon';
+import { withRouter } from 'react-router-dom';
 
 
 
 
-export default class RecipesList extends React.Component {
+class RecipesList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,7 +54,7 @@ export default class RecipesList extends React.Component {
   }
 
   filterByCategory(categoryName) {
-    if (categoryName === this.state.filterBy){
+    if (categoryName === this.state.filterBy) {
       return;
     }
     api.getRecipeByCategory(categoryName)
@@ -76,7 +78,7 @@ export default class RecipesList extends React.Component {
     return (
       <div>
         <Header>
-          <button><img src={favorites} /></button>
+          <button onClick={() => this.props.history.push('/favorites')}><Icon name="favorites" /></button>
           <button><img src={small_logo} /></button>
           <button><img src={cart} /></button>
         </Header>
@@ -90,3 +92,5 @@ export default class RecipesList extends React.Component {
     );
   }
 }
+
+export default withRouter(RecipesList);

@@ -1,16 +1,17 @@
 import React from "react";
-import { Route } from "react-router-dom";
-// import Header from "../Header";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import Favorites from '../pages/favorites/Favorites';
 import Recipes from '../pages/recipes/RecipesList';
 
-const ReactRouter =()=>{
+const ReactRouter = () => {
     return (
-        <React.Fragment>
-            {/* <Header /> */}
-          <Route exact path="/:id" component={Recipes} />
-          {/* <Route  path="/BookByID" component={} /> */}
-            {/* <Route  path="/BookBy2Params" component={} /> */}
-        </React.Fragment>
-    );}
+        <Router>
+            <Switch>
+                <Route exact path="/favorites" component={Favorites} />
+                <Route path="/:id" component={Recipes} />
+            </Switch>
+        </Router>
+    );
+}
 
 export default ReactRouter;
