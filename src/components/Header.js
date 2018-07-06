@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = (props) => {
   const styles = {
-    display: 'flex',
+    display: props.display || 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '10px 20px',

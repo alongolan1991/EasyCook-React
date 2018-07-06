@@ -1,13 +1,9 @@
-import React from 'react';
-import ing_num from '../../sketch/ing_num.svg';
-import calories from '../../sketch/calories.svg';
-import favorites from '../../sketch/favorites.svg';
-import clock from '../../sketch/clock.svg';
+import React from 'react';  
 import LabeledIcon from '../../components/LabeledIcon/LabeledIcon';
 import Icon from '../../components/Icon'
 
 
-const RecipeItem = ({recipe, reverse, onIconClick}) => {
+const RecipeItem = ({recipe, reverse, onIconClick = () => {} }) => {
   const imgCol = (
       <div className="grid-col img-col">
         <img src={recipe.image} className="recipe-image" />
@@ -19,7 +15,7 @@ const RecipeItem = ({recipe, reverse, onIconClick}) => {
 
   const textCol = (
     <div className="grid-col text-col">
-        <img src={favorites} style={{ width: '20px' }} />
+        <Icon name="favorites"/>
         <p>{recipe.name}</p>
         <div className="icon-div">
           <LabeledIcon iconName="calories" text={`${recipe.calories} cal`} />

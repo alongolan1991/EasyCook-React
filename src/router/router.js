@@ -7,8 +7,8 @@ const ReactRouter = () => {
     return (
         <Router>
             <Switch>
-                <Route exact path="/favorites" component={Favorites} />
-                <Route path="/:id" component={Recipes} />
+                <Route exact path="/:id" component={Recipes} />
+                <Route path="/favorites/:id" component={Favorites} />
             </Switch>
         </Router>
     );

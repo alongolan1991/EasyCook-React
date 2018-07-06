@@ -12,6 +12,12 @@ class ApiService {
             category: categoryName
         });
     }
+
+    getFavorites(userID) {
+        return axios.post('http://localhost:3000/getFavorites', {
+            userID: userID
+        });
+    }
 }
 const api = new ApiService();
 export default api;

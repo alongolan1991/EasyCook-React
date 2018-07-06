@@ -82,3 +82,20 @@
 .category-icon.right{
   right : 10px;
 }
+
+.main-category{
+  text-align: center;
+  position: fixed;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  background-color: pink;
+  border-radius: 50%;
+  border: 3px solid #000;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 30px;
+}

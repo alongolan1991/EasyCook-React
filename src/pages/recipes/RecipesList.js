@@ -1,10 +1,5 @@
 import React from 'react';
 import Header from '../../components/Header';
-import cart from '../../sketch/cart.svg';
-import clock from '../../sketch/clock.svg';
-import ing_num from '../../sketch/ing_num.svg';
-import calories from '../../sketch/calories.svg';
-import favorites from '../../sketch/favorites.svg';
 import small_logo from '../../sketch/easy-logo-small.svg';
 import './recipes.css';
 import axios from 'axios';
@@ -78,9 +73,9 @@ class RecipesList extends React.Component {
     return (
       <div>
         <Header>
-          <button onClick={() => this.props.history.push('/favorites')}><Icon name="favorites" /></button>
+          <button onClick={() => this.props.history.push(`/favorites/${this.state.userID}`)}><Icon name="favorites" /></button>
           <button><img src={small_logo} /></button>
-          <button><img src={cart} /></button>
+          <button><Icon name="cart" /></button>
         </Header>
         <div className="recipes-list">
           {this.state.recipes.map((recipe, index) => {
@@ -88,6 +83,12 @@ class RecipesList extends React.Component {
             return <RecipeItem key={recipe._id} reverse={reverse} onIconClick={this.filterByCategory} recipe={recipe} />
           })}
         </div>
+        {this.state.filterBy && (
+          <span onClick={this.getRecipeByStatistics} className="main-category">
+            <Icon name="square" />
+          </span>
+        )}
+        }
       </div>
     );
   }
