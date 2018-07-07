@@ -9,6 +9,7 @@ import RecipeItem from './RecipeItem';
 import api from '../../services/api.services';
 import Icon from '../../components/Icon';
 import { withRouter } from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
 
 
 
@@ -18,16 +19,17 @@ class RecipesList extends React.Component {
     super(props);
     this.state = {
       userID: props.match.params.id,
+      name: props.match.params.name,
       recipes: [],
       filterBy: ''
     };
 
     this.filterByCategory = this.filterByCategory.bind(this);
     this.getRecipeByStatistics = this.getRecipeByStatistics.bind(this);
-
+    this.navigateToRecipePage = this.navigateToRecipePage.bind(this);
   }
 
-
+  
 
   componentWillMount() {
     this.getRecipeByStatistics();
@@ -40,12 +42,27 @@ class RecipesList extends React.Component {
         this.setState({
           recipes: response.data,
           filterBy: "",
-
         })
       })
       .catch(error => {
         console.log(error);
       });
+  }
+
+
+  navigateToRecipePage(recipeID, category) {
+    console.log(category);
+    api.setStatistics(this.state.userID , category)
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+
+
+    this.props.history.push(`/recipe/${recipeID}/${this.state.userID}/${this.state.name}`)
   }
 
   filterByCategory(categoryName) {
@@ -80,7 +97,7 @@ class RecipesList extends React.Component {
         <div className="recipes-list">
           {this.state.recipes.map((recipe, index) => {
             const reverse = index % 2 === 1;
-            return <RecipeItem key={recipe._id} reverse={reverse} onIconClick={this.filterByCategory} recipe={recipe} />
+            return <RecipeItem key={recipe._id} reverse={reverse} onRecipeClick={this.navigateToRecipePage} onIconClick={this.filterByCategory} recipe={recipe} />
           })}
         </div>
         {this.state.filterBy && (
@@ -88,7 +105,6 @@ class RecipesList extends React.Component {
             <Icon name="square" />
           </span>
         )}
-        }
       </div>
     );
   }

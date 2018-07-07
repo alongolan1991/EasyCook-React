@@ -3,10 +3,10 @@ import LabeledIcon from '../../components/LabeledIcon/LabeledIcon';
 import Icon from '../../components/Icon'
 
 
-const RecipeItem = ({recipe, reverse, onIconClick = () => {} }) => {
+const RecipeItem = ({recipe, reverse, onIconClick = () => {}, onRecipeClick }) => {
   const imgCol = (
       <div className="grid-col img-col">
-        <img src={recipe.image} className="recipe-image" />
+        <img src={recipe.image} className="recipe-image"/>
         <span onClick={() => onIconClick(recipe.category)} className={`category-icon ${reverse ? 'right' : 'left'}`}>
          <Icon name={recipe.category} />
         </span>
@@ -26,8 +26,8 @@ const RecipeItem = ({recipe, reverse, onIconClick = () => {} }) => {
   );
 
   return (
-    <div className="grid-row">
-      {reverse ?  [textCol, imgCol]:[imgCol, textCol]}     
+    <div className="grid-row" onClick={() => onRecipeClick(recipe._id, recipe.category)}>
+      {reverse ? [textCol, imgCol] : [imgCol, textCol]}     
     </div>
   );
 }
