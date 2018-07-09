@@ -7,7 +7,7 @@ const RecipeItem = ({recipe, reverse, onIconClick = () => {}, onRecipeClick }) =
   const imgCol = (
       <div className="grid-col img-col">
         <img src={recipe.image} className="recipe-image"/>
-        <span onClick={() => onIconClick(recipe.category)} className={`category-icon ${reverse ? 'right' : 'left'}`}>
+        <span onClick={(e) => { e.stopPropagation();onIconClick(recipe.category)}} className={`category-icon ${reverse ? 'right' : 'left'}`}>
          <Icon name={recipe.category} />
         </span>
       </div>
@@ -15,7 +15,7 @@ const RecipeItem = ({recipe, reverse, onIconClick = () => {}, onRecipeClick }) =
 
   const textCol = (
     <div className="grid-col text-col">
-        <Icon name="favorites"/>
+        <Icon weight="bold" size="30px" name="empty-bm"/>
         <p>{recipe.name}</p>
         <div className="icon-div">
           <LabeledIcon iconName="calories" text={`${recipe.calories} cal`} />

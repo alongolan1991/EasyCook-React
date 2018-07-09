@@ -90,9 +90,9 @@ class RecipesList extends React.Component {
     return (
       <div>
         <Header>
-          <button onClick={() => this.props.history.push(`/favorites/${this.state.userID}`)}><Icon name="favorites" /></button>
+          <button onClick={() => this.props.history.push(`/favorites/${this.state.userID}/${this.state.name}`)}><Icon weight="bold" size="30px" name="empty-bm" /></button>
           <button><img src={small_logo} /></button>
-          <button><Icon name="cart" /></button>
+          <button><Icon  size="30px" name="cart" /></button>
         </Header>
         <div className="recipes-list">
           {this.state.recipes.map((recipe, index) => {

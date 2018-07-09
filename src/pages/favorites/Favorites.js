@@ -13,8 +13,9 @@ class Favorites extends React.Component {
     super(props);
     this.state = {
       userID: props.match.params.id,
+      name: props.match.params.name,
       recipes: [],
-      status: 'Loading'
+      status: 'Loading',
     };
 
   }
@@ -47,7 +48,7 @@ class Favorites extends React.Component {
   render() {
     const header = (
       <Header display={'block'}>
-        <button onClick={() => this.props.history.push(`/${this.state.userID}`)}><Icon name="arrow" /></button>
+        <button onClick={() => this.props.history.push(`/home/${this.state.userID}/${this.state.name}`)}><Icon name="arrow" /></button>
         <h3>My Collection</h3>
       </Header>
     )

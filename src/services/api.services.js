@@ -57,6 +57,22 @@ class ApiService {
 
     }
 
+    addFavorites(userid, recipeid) {
+        return axios.post('http://localhost:3000/addFavorites', {
+            userID: userid,
+            recipeID: recipeid
+        });
+
+    }
+
+    deleteFavorites(userid, recipeid) {
+        return axios.post('http://localhost:3000/deleteFavorites', {
+            userID: userid,
+            recipeID: recipeid
+        });
+
+    }
+
 }
 const api = new ApiService();
 export default api;

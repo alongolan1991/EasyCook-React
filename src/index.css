@@ -14,13 +14,14 @@ button {
 *, *:after, *:before {
   box-sizing: border-box;
 }
+
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?25g6rr');
-  src:  url('fonts/icomoon.eot?25g6rr#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?25g6rr') format('truetype'),
-    url('fonts/icomoon.woff?25g6rr') format('woff'),
-    url('fonts/icomoon.svg?25g6rr#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?3gh567');
+  src:  url('fonts/icomoon.eot?3gh567#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?3gh567') format('truetype'),
+    url('fonts/icomoon.woff?3gh567') format('woff'),
+    url('fonts/icomoon.svg?3gh567#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -40,23 +41,11 @@ button {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-square:before {
-  content: "\e905";
+.icon-empty-bm:before {
+  content: "\e906";
 }
-.icon-ingredients:before {
-  content: "\e926";
-}
-.icon-clock:before {
-  content: "\e94e";
-}
-.icon-vegetarian:before {
-  content: "\e9a4";
-}
-.icon-favorites:before {
-  content: "\e9d2";
-}
-.icon-arrow:before {
-  content: "\ea40";
+.icon-full-bm:before {
+  content: "\e90a";
 }
 .icon-assian:before {
   content: "\e900";
@@ -82,4 +71,19 @@ button {
 }
 .icon-vegan:before {
   content: "\e909";
+}
+.icon-square:before {
+  content: "\e905";
+}
+.icon-ingredients:before {
+  content: "\e926";
+}
+.icon-clock:before {
+  content: "\e94e";
+}
+.icon-vegetarian:before {
+  content: "\e9a4";
+}
+.icon-arrow:before {
+  content: "\ea40";
 }

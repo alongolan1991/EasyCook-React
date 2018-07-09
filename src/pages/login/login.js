@@ -7,11 +7,13 @@ import api from '../../services/api.services';
 import Icon from '../../components/Icon';
 import { withRouter } from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login';
+import './login.css';
 
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             blocklist: false,
             user: ''
@@ -23,7 +25,7 @@ class Login extends React.Component {
     }
 
     responseFacebook = (response) => {
-
+        console.log(response);
         api.createUser(response.name, response.email)
             .then(response1 => {
                 if (response1.data.password === "0") {
@@ -55,33 +57,41 @@ class Login extends React.Component {
     }
 
     renderform() {
+        console.log(this.state.user);
         return (
             <div>
                 <Header justifyContent="center">
                     <img src={small_logo} />
                 </Header>
+                <h3>Welcome {this.state.user.full_name} </h3>
+                <h4 style={{textAlign : 'center'}}>Are you allergic to certain foods?</h4>
                 <form>
-                    <label> lactose:
+                    <div className="block-list-div">
+                    <label className="container"> Lactose
                         <input type="checkbox" ref="lactose" />
+                        <span class="checkmark"></span>
                     </label>
-                    <br />
-                    <label> gluten:
+                    <label className="container"> Gluten
                         <input type="checkbox" ref="gluten" />
+                        <span class="checkmark"></span>
                     </label>
-                    <br />
-                    <label> peanuts:
+                    <label className="container"> Peanuts
                         <input type="checkbox" ref="peanuts"/>
+                        <span class="checkmark"></span>
                     </label>
-                    <br />
-                    <label> diet:
+                    </div>
+                    <h4 style={{textAlign : 'center'}}>How would you like to arrange your recipes?</h4>
+                    <div className="block-list-div">
+                    <label className="container"> Diet
                         <input type="checkbox" ref="diet" />
+                        <span class="checkmark"></span>
                     </label>
-                    <br />
-                    <label> fast:
+                    <label className="container"> Fast
                         <input type="checkbox" ref="fast" />
+                        <span class="checkmark"></span>
                     </label>
-                    <br />
-                    <button type="button" onClick={() => this.updateblocklist()}>update</button>
+                    </div>
+                    <button className="update-button" type="button" onClick={() => this.updateblocklist()}>update</button>
                 </form>
             </div>
         );
@@ -93,9 +103,11 @@ class Login extends React.Component {
                 <Header justifyContent="center">
                     <img src={small_logo} />
                 </Header>
+                <h2 style={{textAlign:'center'}}>Welcome to Easy Cook</h2>
                 <FacebookLogin
                     appId="791617204560345"
                     fields="name,email,picture"
+                    className="facebook-button"
                     callback={this.responseFacebook}
                     render={renderProps => (
                         <button onClick={renderProps.onClick}>This is my custom FB button</button>
@@ -108,6 +120,7 @@ class Login extends React.Component {
 
 
     render() {
+        console.log(this.state.blocklist);
         return (
             this.state.blocklist ? this.renderform() : this.renderlogin()
         );
