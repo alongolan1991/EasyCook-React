@@ -10,6 +10,7 @@ import api from '../../services/api.services';
 import Icon from '../../components/Icon';
 import { withRouter } from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 
@@ -27,6 +28,7 @@ class RecipesList extends React.Component {
     this.filterByCategory = this.filterByCategory.bind(this);
     this.getRecipeByStatistics = this.getRecipeByStatistics.bind(this);
     this.navigateToRecipePage = this.navigateToRecipePage.bind(this);
+    this.addToFavorites = this.addToFavorites.bind(this);
   }
 
   
@@ -47,6 +49,21 @@ class RecipesList extends React.Component {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  addToFavorites(userid, recipeid){
+    api.addFavorites(userid, recipeid)
+    .then(response => {
+      console.log(response);
+      if(response.data.message == 'recipe already exsits in favorites')
+      NotificationManager.warning(response.data.message);
+      else
+      NotificationManager.success(response.data.message);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
   }
 
 
@@ -97,7 +114,7 @@ class RecipesList extends React.Component {
         <div className="recipes-list">
           {this.state.recipes.map((recipe, index) => {
             const reverse = index % 2 === 1;
-            return <RecipeItem key={recipe._id} reverse={reverse} onRecipeClick={this.navigateToRecipePage} onIconClick={this.filterByCategory} recipe={recipe} />
+            return <RecipeItem key={recipe._id} userid={this.state.userID} reverse={reverse} onFavoritesClick={this.addToFavorites} onRecipeClick={this.navigateToRecipePage} onIconClick={this.filterByCategory} recipe={recipe} />
           })}
         </div>
         {this.state.filterBy && (
@@ -105,6 +122,7 @@ class RecipesList extends React.Component {
             <Icon name="square" />
           </span>
         )}
+        <NotificationContainer/>
       </div>
     );
   }

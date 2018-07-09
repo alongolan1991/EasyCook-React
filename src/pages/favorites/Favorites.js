@@ -16,11 +16,19 @@ class Favorites extends React.Component {
       name: props.match.params.name,
       recipes: [],
       status: 'Loading',
+      check: true,
     };
 
+    this.deleteFromFavorites = this.deleteFromFavorites.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
   }
 
   componentWillMount() {
+    this.getFavorites();
+  }
+
+
+  getFavorites(){
     api.getFavorites(this.state.userID)
       .then(response => {
         console.log(response);
@@ -41,7 +49,16 @@ class Favorites extends React.Component {
       });
   }
 
+  deleteFromFavorites(userid, recipeid){
+    api.deleteFavorites(userid, recipeid)
+    .then(response => {
+      this.getFavorites();
+    })
+    .catch(error => {
+      console.log(error);
+    });
 
+  }
 
 
 
@@ -65,13 +82,13 @@ class Favorites extends React.Component {
         return (
       <div>
           <Header display={'block'}>
-            <button onClick={() => this.props.history.push(`/${this.state.userID}`)}><Icon name="arrow" /></button>
+            <button onClick={() => this.props.history.push(`/home/${this.state.userID}/${this.state.name}`)}><Icon name="arrow" /></button>
             <h3>My Collection</h3>
           </Header>
           <div>
             {this.state.recipes.map((recipe, index) => {
               const reverse = index % 2 === 1;
-              return <RecipeItem key={recipe._id} reverse={reverse} recipe={recipe} />
+              return <RecipeItem key={recipe._id} userid={this.state.userID} onFavoritesClick={this.deleteFromFavorites} reverse={reverse} recipe={recipe} />
             })}
           </div>
         </div>

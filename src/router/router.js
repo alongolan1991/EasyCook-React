@@ -5,13 +5,14 @@ import Recipes from '../pages/recipes/RecipesList';
 import SingleRecipe from '../pages/single-recipe/SingleRecipe';
 import Login from '../../src/pages/login/login';
 
+
 const ReactRouter = () => {
     return (
         <Router>
             <Switch>
                 <Route exact path="/home/:id/:name" component={Recipes} />
+                <Route path="/favorites/:id/:name" component={Favorites} />
                 <Route  path="/login" component={Login} />
-                <Route path="/favorites/:id" component={Favorites} />
                 <Route path="/recipe/:recipeid/:userid" component={SingleRecipe} />
             </Switch>
         </Router>
