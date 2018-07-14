@@ -2,37 +2,37 @@ import axios from 'axios';
 
 class ApiService {
     getUserRecipesByStatistics(userID) {
-        return axios.post('http://localhost:3000/getUserRecipesByStatistics', {
+        return axios.post('https://easy-cook.herokuapp.com/getUserRecipesByStatistics', {
             userID: userID
         });
     }
 
     getRecipeByCategory(categoryName) {
-        return axios.post('http://localhost:3000/getRecipesByCategory', {
+        return axios.post('https://easy-cook.herokuapp.com/getRecipesByCategory', {
             category: categoryName
         });
     }
 
     getFavorites(userID) {
-        return axios.post('http://localhost:3000/getFavorites', {
+        return axios.post('https://easy-cook.herokuapp.com/getFavorites', {
             userID: userID
         });
     }
 
     getRecipeByID(recipeID) {
-        return axios.post('http://localhost:3000/getRecipeById', {
+        return axios.post('https://easy-cook.herokuapp.com/getRecipeById', {
             recipeID: recipeID
         });
     }
 
     getCommentContent(commetnsId) {
-        return axios.post('http://localhost:3000/getcommentcontent', {
+        return axios.post('https://easy-cook.herokuapp.com/getcommentcontent', {
             commentsid: commetnsId
         });
     }
 
     createComment(userName, rate, content, recipeID) {
-        return axios.post('http://localhost:3000/createComment', {
+        return axios.post('https://easy-cook.herokuapp.com/createComment', {
             userName: userName,
             rate: rate,
             content: content,
@@ -40,8 +40,16 @@ class ApiService {
         });
     }
 
+    deleteComment(recipeID, commentID, userName) {
+        return axios.post('https://easy-cook.herokuapp.com/deleteComment', {
+            userName: userName,
+            commentID: commentID,
+            recipeID: recipeID
+        });
+    }
+
     createUser(userid, email) {
-        return axios.post('http://localhost:3000/createUser', {
+        return axios.post('https://easy-cook.herokuapp.com/createUser', {
             userName: userid,
             password: "111111",
             email: email,
@@ -49,7 +57,7 @@ class ApiService {
     }
 
     setUserBlockList(userid, gluten, lactose, peanuts, fast, diet) {
-        return axios.post('http://localhost:3000/setUserBlockList', {
+        return axios.post('https://easy-cook.herokuapp.com/setUserBlockList', {
             userID: userid,
             gluten: gluten,
             lactose: lactose,
@@ -59,7 +67,7 @@ class ApiService {
         });
     }
     setStatistics(userid, category) {
-        return axios.post('http://localhost:3000/setStatistics', {
+        return axios.post('https://easy-cook.herokuapp.com/setStatistics', {
             userID: userid,
             category: category
         });
@@ -67,7 +75,7 @@ class ApiService {
     }
 
     addFavorites(userid, recipeid) {
-        return axios.post('http://localhost:3000/addFavorites', {
+        return axios.post('https://easy-cook.herokuapp.com/addFavorites', {
             userID: userid,
             recipeID: recipeid
         });
@@ -75,7 +83,7 @@ class ApiService {
     }
 
     deleteFavorites(userid, recipeid) {
-        return axios.post('http://localhost:3000/deleteFavorites', {
+        return axios.post('https://easy-cook.herokuapp.com/deleteFavorites', {
             userID: userid,
             recipeID: recipeid
         });

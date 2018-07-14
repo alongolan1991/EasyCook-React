@@ -8,8 +8,7 @@ const Header = (props) => {
     padding: '10px 20px',
     background: props.background || 'linear-gradient(to right, #fdcfdc 0%,#e8fffa 100%)'
   }
-  
-  
+
 
   return (
     <div style={styles}>

@@ -1,15 +1,11 @@
 import React from 'react';
 import Header from '../../components/Header';
-import small_logo from '../../sketch/easy-logo-small.svg';
+import small_logo from '../../sketch/easyLogoSmall.svg';
 import './recipes.css';
-import axios from 'axios';
-import pic from '../../media/chicken/Baked Buffalo Wings/image/Baked Buffalo Wings.jpg';
-import LabeledIcon from '../../components/LabeledIcon/LabeledIcon';
 import RecipeItem from './RecipeItem';
 import api from '../../services/api.services';
 import Icon from '../../components/Icon';
 import { withRouter } from 'react-router-dom';
-import FacebookLogin from 'react-facebook-login';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
@@ -53,8 +49,7 @@ class RecipesList extends React.Component {
   addToFavorites(userid, recipeid){
     api.addFavorites(userid, recipeid)
     .then(response => {
-      console.log(response);
-      if(response.data.message == 'recipe already exsits in favorites')
+      if(response.data.message === 'recipe already exsits in favorites')
       NotificationManager.warning(response.data.message);
       else
       NotificationManager.success(response.data.message);
@@ -67,18 +62,13 @@ class RecipesList extends React.Component {
 
 
   navigateToRecipePage(recipeID, category) {
-    console.log(category);
     api.setStatistics(this.state.userID , category)
     .then(response => {
-      console.log(response);
+      this.props.history.push(`/recipe/${recipeID}/${this.state.userID}/${this.state.name}`)
     })
     .catch(error => {
       console.log(error);
     });
-
-
-
-    this.props.history.push(`/recipe/${recipeID}/${this.state.userID}/${this.state.name}`)
   }
 
   filterByCategory(categoryName) {
@@ -87,7 +77,6 @@ class RecipesList extends React.Component {
     }
     api.getRecipeByCategory(categoryName)
       .then(response => {
-        console.log(response);
         this.setState({
           recipes: response.data,
           filterBy: categoryName,
@@ -106,7 +95,7 @@ class RecipesList extends React.Component {
       <div>
         <Header>
           <button onClick={() => this.props.history.push(`/favorites/${this.state.userID}/${this.state.name}`)}><Icon weight="bold" size="30px" name="empty-bm" /></button>
-          <button><img src={small_logo} /></button>
+          <button><img src={small_logo} alt="" /></button>
           <button><Icon  size="30px" name="cart" /></button>
         </Header>
         <div className="recipes-list">

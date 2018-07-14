@@ -35,7 +35,7 @@
   .google-login{
     position: absolute;
     left:50%;
-    top: 29%;
+    top: 38%;
     transform: translateX(-50%);
     display: inline-block;
     background: rgb(209, 72, 54);

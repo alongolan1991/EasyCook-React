@@ -2,12 +2,12 @@ import React from 'react';
 import './LabeledIcon.css';
 import Icon from '../Icon';
 
-const LabeledIcon = ({iconName, row, text}) => {
-   
+const LabeledIcon = ({ iconName, row, text }) => {
+
     return (
-        <div className="labeled-icon" style={{flexDirection: row ? 'row' : 'column'}}>
+        <div className="labeled-icon" style={{ flexDirection: row ? 'row' : 'column' }}>
             <Icon name={iconName} />
-            <p className="icons" style={{marginLeft: row ? '5px' : '0'}}>{text}</p>
+            <p className="icons" style={{ marginLeft: row ? '5px' : '0' }}>{text}</p>
         </div>
     );
 }

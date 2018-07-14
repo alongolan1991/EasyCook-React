@@ -1,13 +1,13 @@
 import React from 'react';  
 import LabeledIcon from '../../components/LabeledIcon/LabeledIcon';
 import Icon from '../../components/Icon';
-import api from '../../services/api.services';
+import idGenerator from 'react-id-generator';
 
 
 const RecipeItem = ({recipe, userid, reverse, onFavoritesClick, onIconClick = () => {}, onRecipeClick }) => {
   const imgCol = (
-      <div className="grid-col img-col">
-        <img src={recipe.image} className="recipe-image"/>
+      <div key={idGenerator()} className="grid-col img-col">
+        <img alt="" src={recipe.image} className="recipe-image"/>
         <span onClick={(e) => { e.stopPropagation(); onIconClick(recipe.category)}} className={`category-icon ${reverse ? 'right' : 'left'}`}>
          <Icon name={recipe.category} />
         </span>
@@ -16,7 +16,7 @@ const RecipeItem = ({recipe, userid, reverse, onFavoritesClick, onIconClick = ()
 
 
   const textCol = (
-    <div className="grid-col text-col">
+    <div key={idGenerator()} className="grid-col text-col">
         <div onClick={(e) => {e.stopPropagation(); onFavoritesClick(userid, recipe._id)}}>
         <Icon weight="bold" size="30px" name="empty-bm" />
         </div>
@@ -30,7 +30,7 @@ const RecipeItem = ({recipe, userid, reverse, onFavoritesClick, onIconClick = ()
   );
 
   return (
-    <div className="grid-row" onClick={() => onRecipeClick(recipe._id, recipe.category)}>
+    <div key={recipe._id} className="grid-row" onClick={() => onRecipeClick(recipe._id, recipe.category)}>
       {reverse ? [textCol, imgCol] : [imgCol, textCol]}     
     </div>
   );

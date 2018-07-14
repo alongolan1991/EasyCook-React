@@ -1,12 +1,8 @@
 import React from 'react';
 import Header from '../../components/Header';
-import small_logo from '../../sketch/easy-logo-small.svg';
-import axios from 'axios';
-import LabeledIcon from '../../components/LabeledIcon/LabeledIcon';
+import small_logo from '../../sketch/easyLogoSmall.svg';
 import api from '../../services/api.services';
-import Icon from '../../components/Icon';
 import { withRouter } from 'react-router-dom';
-import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import './login.css';
 
@@ -27,7 +23,6 @@ class Login extends React.Component {
     }
 
     responseGoogle = (response) => {
-        console.log(response);
         api.createUser(response.profileObj.name, response.profileObj.email)
             .then(response1 => {
                 if (response1.data.password === "0") {
@@ -64,7 +59,7 @@ class Login extends React.Component {
         return (
             <div className="loginBg">
                 <Header justifyContent="center">
-                    <img src={small_logo} />
+                    <img alt="" src={small_logo} />
                 </Header>
                 <h1 className="header-font">Welcome {this.state.user.full_name} </h1>
                 <br/>
@@ -109,7 +104,7 @@ class Login extends React.Component {
         return (
             <div className="loginBg">
                     <Header justifyContent="center">
-                        <img src={small_logo} />
+                        <img alt="" src={small_logo} />
                     </Header>
                     <br/><br/><br/>
                     <h1 className="header-font">Welcome to Easy Cook</h1>

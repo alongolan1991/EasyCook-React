@@ -9,13 +9,13 @@ import Redirect from "react-router-dom/Redirect";
 
 const ReactRouter = () => {
     return (
-        <Router>
+        <Router basename={'/2017-2018/dcs/dev_176/easy-cook-app'}>
             <Switch>
-                <Route path="/login" component={Login} />
-                <Route path="/home/:id/:name" component={Recipes} />
-                <Route path="/favorites/:id/:name" component={Favorites} />
-                <Route path="/recipe/:recipeid/:userid/:name" component={SingleRecipe} />
-                <Redirect from ="/" to="/login"/>
+                <Route path={`/login`} component={Login} />
+                <Route path={`/home/:id/:name`} component={Recipes} />
+                <Route path={`/favorites/:id/:name`} component={Favorites} />
+                <Route path={`/recipe/:recipeid/:userid/:name`} component={SingleRecipe} />
+                <Redirect from ={`/`} to={`/login`}/>
             </Switch>
         </Router>
     );

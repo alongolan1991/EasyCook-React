@@ -6,7 +6,7 @@ import Icon from '../../components/Icon';
 import { withRouter } from 'react-router-dom';
 import Iframe from 'react-iframe';
 import './single-recipe.css';
-import userPic from '../../sketch/user.png';
+import userPic from '../../sketch/user.png'
 
 
 
@@ -25,6 +25,7 @@ class SingleRecipe extends React.Component {
         this.addComment = this.addComment.bind(this);
         this.getCommentContent = this.getCommentContent.bind(this);
         this.getRecipeID = this.getRecipeID.bind(this);
+        this.deleteComment = this.deleteComment.bind(this);
     }
 
 
@@ -33,7 +34,7 @@ class SingleRecipe extends React.Component {
         this.getRecipeID();
     }
 
-    getRecipeID(){
+    getRecipeID() {
         api.getRecipeByID(this.state.recipeID)
             .then(response => {
                 this.setState({
@@ -52,7 +53,7 @@ class SingleRecipe extends React.Component {
             .then(response => {
                 this.setState({
                     comments: response.data,
-                    isClick:false
+                    isClick: false
                 })
             })
             .catch(error => {
@@ -68,10 +69,20 @@ class SingleRecipe extends React.Component {
 
     }
 
+    deleteComment(commentID) {
+        api.deleteComment(this.state.recipeID, commentID, this.state.name)
+            .then(response => {
+                this.getRecipeID();
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     addComment(rate, content) {
         api.createComment(this.state.name, rate, content, this.state.recipeID)
             .then(response => {
-               this.getRecipeID();
+                this.getRecipeID();
             })
             .catch(error => {
                 console.log(error);
@@ -94,7 +105,7 @@ class SingleRecipe extends React.Component {
                     <button onClick={() => this.props.history.push(`/home/${this.state.userID}/${this.state.name}`)}><Icon name="arrow" /></button>
                     <button><Icon name="favorites" /></button>
                 </Header>
-                <Iframe url="http://www.youtube.com/embed/xDMP3i36naA"
+                <Iframe url={this.state.recipe.video_steps[0]}
                     width="100%"
                     height="190px"
                     id="myId"
@@ -140,9 +151,9 @@ class SingleRecipe extends React.Component {
                             Finished? Add Comment
                         </div>
                         {this.state.isClick && (
-                            <div style={{padding : "5%"}}>
-                                <label style={{color : "#222222"}}> Rate:
-                                <select ref="rate" style={{width: "38px", height: "25px"}}>
+                            <div style={{ padding: "5%" }}>
+                                <label style={{ color: "#222222" }}> Rate:
+                                <select ref="rate" style={{ width: "38px", height: "25px" }}>
                                         <option value="1" >1</option>
                                         <option value="2" selected>2</option>
                                         <option value="3">3</option>
@@ -150,8 +161,8 @@ class SingleRecipe extends React.Component {
                                         <option value="5">5</option>
                                     </select>
                                 </label>
-                                <br/><br/>
-                                <label style={{color : "#222222"}}> Leave your comment here:
+                                <br /><br />
+                                <label style={{ color: "#222222" }}> Leave your comment here:
                                     <br />
                                     <textarea className="comment-content" ref={
                                         (input) => {
@@ -159,7 +170,7 @@ class SingleRecipe extends React.Component {
                                         }
                                     } />
                                 </label>
-                                <br/>
+                                <br />
                                 <button type="button" className="update-comment" onClick={() => this.addComment(this.refs.rate.value, this.commentContent.value)}>send</button>
                             </div>
 
@@ -170,8 +181,13 @@ class SingleRecipe extends React.Component {
                         {this.state.comments.map((comment, index) => {
                             return (
                                 <div className="comment-item">
+                                {comment.user_name === this.state.name && (
+                                    <div className="bin-icon" onClick={() => this.deleteComment(comment._id)}>
+                                        <Icon name="bin" />
+                                    </div>
+                                )}
                                     <div style={{ display: 'flex' }}>
-                                        <img src={userPic} style={{ width: '50px', height: '50px' }} />
+                                        <img alt="" src={userPic} style={{ width: '50px', height: '50px' }} />
                                         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '15px' }}>
                                             <p className="comment-details">{comment.user_name}</p>
                                             <p className="comment-details paint-gray">rate: {comment.rate} stars</p>
@@ -179,12 +195,10 @@ class SingleRecipe extends React.Component {
                                     </div>
                                     <p className="paint-gray">{comment.content}</p>
                                 </div>
-                            );
+                                );
                         })}
                     </div>
-
                 </div>
-
             </div>
         );
 
