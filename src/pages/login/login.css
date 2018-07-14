@@ -1,4 +1,8 @@
-/* Customize the label (the container) */
+@font-face{
+  font-family: 'Hel';
+  src: url('../../fonts/HelveticaNeue.ttf');
+}
+
 .container {
     display: block;
     position: relative;
@@ -9,7 +13,9 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
+    user-select: none;  
+    font-family: "Hel";
+    font-weight: 900;
   }
 
   .block-list-div{
@@ -24,6 +30,29 @@
       top: 30%;
       transform: translateX(-50%);
      
+  }
+
+  .google-login{
+    position: absolute;
+    left:50%;
+    top: 29%;
+    transform: translateX(-50%);
+    display: inline-block;
+    background: rgb(209, 72, 54);
+    color: rgb(255, 255, 255);
+    width: 190px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Roboto;
+  }
+
+  .loginBg{
+    height: 100vh;
+    background: linear-gradient(to right, #fdcfdc 0%,#e8fffa 100%)
   }
 
   .update-button{
@@ -52,7 +81,7 @@
     left: 0;
     height: 25px;
     width: 25px;
-    background-color: #eee;
+    background-color: #666666;
   }
   
   /* On mouse-over, add a grey background color */
@@ -62,7 +91,7 @@
   
   /* When the checkbox is checked, add a blue background */
   .container input:checked ~ .checkmark {
-    background-color: #2196F3;
+    background-color: #666666;
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -89,3 +118,11 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+
+  .header-font{
+    font-family: 'Hel';
+    text-align: center;
+    font-weight: 900;
+  }
+
+  

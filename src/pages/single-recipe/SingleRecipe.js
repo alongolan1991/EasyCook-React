@@ -19,33 +19,66 @@ class SingleRecipe extends React.Component {
             name: props.match.params.name,
             recipe: '',
             comments: [],
+            isClick: false
         };
-
+        this.commentClick = this.commentClick.bind(this);
+        this.addComment = this.addComment.bind(this);
+        this.getCommentContent = this.getCommentContent.bind(this);
+        this.getRecipeID = this.getRecipeID.bind(this);
     }
 
 
 
     componentWillMount() {
+        this.getRecipeID();
+    }
+
+    getRecipeID(){
         api.getRecipeByID(this.state.recipeID)
             .then(response => {
                 this.setState({
                     recipe: response.data
-                })
-                api.getCommentContent(this.state.recipe.comments)
-                    .then(response => {
-                        this.setState({
-                            comments: response.data
-                        })
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                });
+                this.getCommentContent();
             })
             .catch(error => {
                 console.log(error);
             });
 
     }
+
+    getCommentContent() {
+        api.getCommentContent(this.state.recipe.comments)
+            .then(response => {
+                this.setState({
+                    comments: response.data,
+                    isClick:false
+                })
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+    }
+
+    commentClick() {
+        this.setState({
+            isClick: true
+        })
+
+    }
+
+    addComment(rate, content) {
+        api.createComment(this.state.name, rate, content, this.state.recipeID)
+            .then(response => {
+               this.getRecipeID();
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+
 
 
 
@@ -70,7 +103,7 @@ class SingleRecipe extends React.Component {
                     position="relative"
                     allowFullScreen
                 />
-                <div style={{bottom: '0'}}>
+                <div style={{ bottom: '0' }}>
                     <div style={{ borderBottom: '2px solid rgb(157, 157, 157)' }}>
                         <h3>{this.state.recipe.name}</h3>
                         <div className="icon-div">
@@ -103,18 +136,45 @@ class SingleRecipe extends React.Component {
                         </ol>
                     </div>
                     <div>
-                        <div className="add-comment">
+                        <div onClick={this.commentClick} className="add-comment">
                             Finished? Add Comment
                         </div>
+                        {this.state.isClick && (
+                            <div style={{padding : "5%"}}>
+                                <label style={{color : "#222222"}}> Rate:
+                                <select ref="rate" style={{width: "38px", height: "25px"}}>
+                                        <option value="1" >1</option>
+                                        <option value="2" selected>2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </label>
+                                <br/><br/>
+                                <label style={{color : "#222222"}}> Leave your comment here:
+                                    <br />
+                                    <textarea className="comment-content" ref={
+                                        (input) => {
+                                            this.commentContent = input;
+                                        }
+                                    } />
+                                </label>
+                                <br/>
+                                <button type="button" className="update-comment" onClick={() => this.addComment(this.refs.rate.value, this.commentContent.value)}>send</button>
+                            </div>
+
+
+
+                        )}
                         <h4 className="comment-header">Discustion</h4 >
                         {this.state.comments.map((comment, index) => {
                             return (
                                 <div className="comment-item">
                                     <div style={{ display: 'flex' }}>
                                         <img src={userPic} style={{ width: '50px', height: '50px' }} />
-                                        <div style={{display: 'flex' , flexDirection: 'column' , marginLeft: '15px'}}>
-                                        <p className="comment-details">{comment.user_name}</p>
-                                        <p className="comment-details paint-gray">rate: {comment.rate} stars</p>
+                                        <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '15px' }}>
+                                            <p className="comment-details">{comment.user_name}</p>
+                                            <p className="comment-details paint-gray">rate: {comment.rate} stars</p>
                                         </div>
                                     </div>
                                     <p className="paint-gray">{comment.content}</p>
@@ -122,7 +182,7 @@ class SingleRecipe extends React.Component {
                             );
                         })}
                     </div>
-                    
+
                 </div>
 
             </div>

@@ -31,6 +31,15 @@ class ApiService {
         });
     }
 
+    createComment(userName, rate, content, recipeID) {
+        return axios.post('http://localhost:3000/createComment', {
+            userName: userName,
+            rate: rate,
+            content: content,
+            recipeID: recipeID
+        });
+    }
+
     createUser(userid, email) {
         return axios.post('http://localhost:3000/createUser', {
             userName: userid,
@@ -70,6 +79,7 @@ class ApiService {
             userID: userid,
             recipeID: recipeid
         });
+
 
     }
 

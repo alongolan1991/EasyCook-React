@@ -20,7 +20,6 @@ class Login extends React.Component {
             user: '',
             autoload: false
         }
-        this.responseFacebook = this.responseFacebook.bind(this);
         this.renderlogin = this.renderlogin.bind(this);
         this.renderform = this.renderform.bind(this);
         this.updateblocklist = this.updateblocklist.bind(this);
@@ -29,11 +28,7 @@ class Login extends React.Component {
 
     responseGoogle = (response) => {
         console.log(response);
-      }
-
-    responseFacebook = (response) => {
-        console.log(response);
-        api.createUser(response.name, response.email)
+        api.createUser(response.profileObj.name, response.profileObj.email)
             .then(response1 => {
                 if (response1.data.password === "0") {
                     this.setState({
@@ -67,39 +62,44 @@ class Login extends React.Component {
     renderform() {
         console.log(this.state.user);
         return (
-            <div>
+            <div className="loginBg">
                 <Header justifyContent="center">
                     <img src={small_logo} />
                 </Header>
-                <h3>Welcome {this.state.user.full_name} </h3>
-                <h4 style={{ textAlign: 'center' }}>Are you allergic to certain foods?</h4>
+                <h1 className="header-font">Welcome {this.state.user.full_name} </h1>
+                <br/>
+                <br/>
+                <h3 className="header-font">Are you allergic to certain foods?</h3>
                 <form>
                     <div className="block-list-div">
                         <label className="container"> Lactose
                         <input type="checkbox" ref="lactose" />
-                            <span class="checkmark"></span>
+                            <span className="checkmark"></span>
                         </label>
                         <label className="container"> Gluten
                         <input type="checkbox" ref="gluten" />
-                            <span class="checkmark"></span>
+                            <span className="checkmark"></span>
                         </label>
                         <label className="container"> Peanuts
                         <input type="checkbox" ref="peanuts" />
-                            <span class="checkmark"></span>
+                            <span className="checkmark"></span>
                         </label>
                     </div>
-                    <h4 style={{ textAlign: 'center' }}>How would you like to arrange your recipes?</h4>
+                    <br/>
+                    <br/>
+                    <h3 className="header-font">How would you like to arrange your recipes?</h3>
                     <div className="block-list-div">
                         <label className="container"> Diet
-                        <input type="checkbox" ref="diet" />
-                            <span class="checkmark"></span>
+                        <input type="checkbox" ref="diet"/>
+                            <span className="checkmark"></span>
                         </label>
                         <label className="container"> Fast
                         <input type="checkbox" ref="fast" />
-                            <span class="checkmark"></span>
+                            <span className="checkmark"></span>
                         </label>
                     </div>
-                    <button className="update-button" type="button" onClick={() => this.updateblocklist()}>update</button>
+                    <br/>
+                    <button className="update-button" type="button" onClick={() => this.updateblocklist()}>Launch</button>
                 </form>
             </div>
         );
@@ -107,28 +107,20 @@ class Login extends React.Component {
 
     renderlogin() {
         return (
-            <div>
-                <Header justifyContent="center">
-                    <img src={small_logo} />
-                </Header>
-                <h2 style={{ textAlign: 'center' }}>Welcome to Easy Cook</h2>
-                <FacebookLogin
-                    appId="791617204560345"
-                    fields="name,email,picture"
-                    className="facebook-button"
-                    callback={this.responseFacebook}
-                    autoLoad={this.state.autoload}
-                    render={renderProps => (
-                        <button onClick={renderProps.onClick}>This is my custom FB button</button>
-                    )}
-                />
-
-                <GoogleLogin
-                    clientId="427996517537-n49776f8rf63c8su4log1cussk96ijs9.apps.googleusercontent.com"
-                    buttonText="Login"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
-                />
+            <div className="loginBg">
+                    <Header justifyContent="center">
+                        <img src={small_logo} />
+                    </Header>
+                    <br/><br/><br/>
+                    <h1 className="header-font">Welcome to Easy Cook</h1>
+                    <GoogleLogin
+                        clientId="360224907049-frodfgirnrnjhc129ljvt6v38i3t84nb.apps.googleusercontent.com"
+                        buttonText="Login with Google"
+                        className="google-login"
+                        autoLoad={this.state.autoload}
+                        onSuccess={this.responseGoogle}
+                        onFailure={this.responseGoogle}
+                    />
             </div>
         );
     }
@@ -136,7 +128,6 @@ class Login extends React.Component {
 
 
     render() {
-        console.log(this.state.blocklist);
         return (
             this.state.blocklist ? this.renderform() : this.renderlogin()
         );
