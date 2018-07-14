@@ -10,8 +10,6 @@ import userPic from '../../sketch/user.png';
 
 
 
-
-
 class SingleRecipe extends React.Component {
     constructor(props) {
         super(props);
@@ -30,13 +28,11 @@ class SingleRecipe extends React.Component {
     componentWillMount() {
         api.getRecipeByID(this.state.recipeID)
             .then(response => {
-                console.log(response.data);
                 this.setState({
                     recipe: response.data
                 })
                 api.getCommentContent(this.state.recipe.comments)
                     .then(response => {
-                        console.log(response.data);
                         this.setState({
                             comments: response.data
                         })

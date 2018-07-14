@@ -40,7 +40,6 @@ class RecipesList extends React.Component {
   getRecipeByStatistics() {
     api.getUserRecipesByStatistics(this.state.userID)
       .then(response => {
-        console.log(response);
         this.setState({
           recipes: response.data,
           filterBy: "",
@@ -103,7 +102,6 @@ class RecipesList extends React.Component {
     if (this.state.recipes.length === 0) {
       return <div>Loading...</div>;
     }
-    console.log(this.state.recipes[0].image);
     return (
       <div>
         <Header>

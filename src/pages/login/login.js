@@ -7,6 +7,7 @@ import api from '../../services/api.services';
 import Icon from '../../components/Icon';
 import { withRouter } from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 import './login.css';
 
 
@@ -16,13 +17,19 @@ class Login extends React.Component {
 
         this.state = {
             blocklist: false,
-            user: ''
+            user: '',
+            autoload: false
         }
         this.responseFacebook = this.responseFacebook.bind(this);
         this.renderlogin = this.renderlogin.bind(this);
         this.renderform = this.renderform.bind(this);
         this.updateblocklist = this.updateblocklist.bind(this);
+        this.responseGoogle = this.responseGoogle.bind(this);
     }
+
+    responseGoogle = (response) => {
+        console.log(response);
+      }
 
     responseFacebook = (response) => {
         console.log(response);
@@ -31,7 +38,8 @@ class Login extends React.Component {
                 if (response1.data.password === "0") {
                     this.setState({
                         blocklist: true,
-                        user: response1.data
+                        user: response1.data,
+                        autoload: true
                     })
                 }
                 else {
@@ -44,16 +52,16 @@ class Login extends React.Component {
 
     }
 
-    updateblocklist(){
-        api.setUserBlockList(this.state.user._id, this.refs.gluten.checked , this.refs.lactose.checked , this.refs.peanuts.checked , this.refs.fast.checked, this.refs.diet.checked)
-        .then(response1 => {
-            this.setState({
-                blocklist: false
+    updateblocklist() {
+        api.setUserBlockList(this.state.user._id, this.refs.gluten.checked, this.refs.lactose.checked, this.refs.peanuts.checked, this.refs.fast.checked, this.refs.diet.checked)
+            .then(response1 => {
+                this.setState({
+                    blocklist: false
+                })
             })
-        })
-        .catch(error => {
-            console.log(error);
-        });
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     renderform() {
@@ -64,32 +72,32 @@ class Login extends React.Component {
                     <img src={small_logo} />
                 </Header>
                 <h3>Welcome {this.state.user.full_name} </h3>
-                <h4 style={{textAlign : 'center'}}>Are you allergic to certain foods?</h4>
+                <h4 style={{ textAlign: 'center' }}>Are you allergic to certain foods?</h4>
                 <form>
                     <div className="block-list-div">
-                    <label className="container"> Lactose
+                        <label className="container"> Lactose
                         <input type="checkbox" ref="lactose" />
-                        <span class="checkmark"></span>
-                    </label>
-                    <label className="container"> Gluten
+                            <span class="checkmark"></span>
+                        </label>
+                        <label className="container"> Gluten
                         <input type="checkbox" ref="gluten" />
-                        <span class="checkmark"></span>
-                    </label>
-                    <label className="container"> Peanuts
-                        <input type="checkbox" ref="peanuts"/>
-                        <span class="checkmark"></span>
-                    </label>
+                            <span class="checkmark"></span>
+                        </label>
+                        <label className="container"> Peanuts
+                        <input type="checkbox" ref="peanuts" />
+                            <span class="checkmark"></span>
+                        </label>
                     </div>
-                    <h4 style={{textAlign : 'center'}}>How would you like to arrange your recipes?</h4>
+                    <h4 style={{ textAlign: 'center' }}>How would you like to arrange your recipes?</h4>
                     <div className="block-list-div">
-                    <label className="container"> Diet
+                        <label className="container"> Diet
                         <input type="checkbox" ref="diet" />
-                        <span class="checkmark"></span>
-                    </label>
-                    <label className="container"> Fast
+                            <span class="checkmark"></span>
+                        </label>
+                        <label className="container"> Fast
                         <input type="checkbox" ref="fast" />
-                        <span class="checkmark"></span>
-                    </label>
+                            <span class="checkmark"></span>
+                        </label>
                     </div>
                     <button className="update-button" type="button" onClick={() => this.updateblocklist()}>update</button>
                 </form>
@@ -103,15 +111,23 @@ class Login extends React.Component {
                 <Header justifyContent="center">
                     <img src={small_logo} />
                 </Header>
-                <h2 style={{textAlign:'center'}}>Welcome to Easy Cook</h2>
+                <h2 style={{ textAlign: 'center' }}>Welcome to Easy Cook</h2>
                 <FacebookLogin
                     appId="791617204560345"
                     fields="name,email,picture"
                     className="facebook-button"
                     callback={this.responseFacebook}
+                    autoLoad={this.state.autoload}
                     render={renderProps => (
                         <button onClick={renderProps.onClick}>This is my custom FB button</button>
                     )}
+                />
+
+                <GoogleLogin
+                    clientId="427996517537-n49776f8rf63c8su4log1cussk96ijs9.apps.googleusercontent.com"
+                    buttonText="Login"
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
                 />
             </div>
         );
